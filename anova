@@ -1,1 +1,16 @@
 anova_small
+
+from scipy.stats import stats
+import statistics
+import pandas as pd
+import numpy as np
+import pingouin as pg
+# anova на примере датасета с генотерапией
+URL = 'https://stepik.org/media/attachments/lesson/8083/genetherapy.csv'
+data = pd.read_csv(URL)
+data.head()
+# anova в 4 строки
+stat_data = data.groupby("Therapy").agg(["count", "mean","std"])
+stat_data.columns=["N","Mx","SD"]
+stat_data
+pg.anova(data=data, dv = 'expr',between ='Therapy',detailed=True )
