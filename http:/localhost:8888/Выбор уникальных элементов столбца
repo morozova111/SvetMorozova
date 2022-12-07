@@ -1,0 +1,7 @@
+Задание
+
+Отобрать различные (уникальные) элементы столбца amount таблицы book
+
+
+SELECT distinct amount 
+FROM book;
