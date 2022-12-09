@@ -1,0 +1,18 @@
+Задание
+
+В таблице fine увеличить в два раза сумму неоплаченных штрафов для отобранных на предыдущем шаге записей. 
+
+
+UPDATE fine,
+(SELECT name, number_plate, violation 
+FROM fine
+GROUP BY name, number_plate, violation
+HAVING COUNT(violation)>=2
+                       ORDER BY name) as df
+SET sum_fine = sum_fine * 2
+WHERE  fine.name=df.name
+AND  fine.number_plate=df.number_plate
+AND  fine.violation=df.violation
+and fine.date_payment IS NULL
+;
+Select * from fine;
